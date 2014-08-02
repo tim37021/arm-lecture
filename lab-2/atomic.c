@@ -23,7 +23,7 @@ void *doSomeThing(void *arg)
 	counter += 1;
 	printf("\n Job %d started\n", counter);
 
-	for (i = 0; i < (0xFFFFFFFF); i++);
+	for (i = 0; i < 10000000; i++);
 
 	printf("\n Job %d finished\n", counter);
 
