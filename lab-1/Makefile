@@ -1,4 +1,5 @@
 CC	= arm-linux-gnueabihf-gcc
+OBJDUMP = arm-linux-gnueabihf-objdump
 CFLAGS	= -O1 -Wall
 LDFLAGS = -fno-stack-protector
 
@@ -20,8 +21,12 @@ fibseq.o: fibseq.c
 %.o: %.s
 	$(CC) -c $(CFLAGS) -o $@ $<
 
+cheat:
+	$(CC) -c $(CFLAGS) fib_gcc.c
+	$(OBJDUMP) -S fib_gcc.o > fib_gcc.txt
+
 clean:
-	rm -f $(objects) fibseq
+	rm -f $(objects) fib_gcc.o fibseq
 
 QEMU_CMD = qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq &
 CMD = yes 9 | $(call QEMU_CMD) && sleep 1
